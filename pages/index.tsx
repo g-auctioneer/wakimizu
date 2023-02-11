@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import prefs from "../utils/define";
 
 const Index = () => {
@@ -11,12 +11,6 @@ const Index = () => {
     setWakimizu(result.result);
   }
 
-  useEffect(() => {
-    if (Object.keys(wakimizu).length) {
-      // not empty
-    }
-  }, [wakimizu]);
-
   return (
     <>
       <div>
@@ -25,13 +19,44 @@ const Index = () => {
             return <option value={pref} key={index}>{pref}</option>
           })}
         </select>
-        <button onClick={fetchWakimizu}>
-          検索
-        </button>
+        <button onClick={fetchWakimizu}>検索</button>
       </div>
       <div>
+        <Table wakimizu={wakimizu}/>
       </div>
     </>
+  );
+}
+
+const Table = ({wakimizu}) => {
+  if (!Object.keys(wakimizu).length) {
+    return null;
+  }
+
+  let index = 0;
+  const tableCells = Object.keys(wakimizu).map(key => (
+    <tr key={key}>
+      <td>{++index}</td>
+      <td>{wakimizu[key].name}</td>
+      <td>{wakimizu[key].overview}</td>
+      <td>{wakimizu[key].address}</td>
+    </tr>
+  ));
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>名称</th>
+          <th>概説</th>
+          <th>住所</th>
+        </tr>
+      </thead>
+      <tbody>
+        {tableCells}
+      </tbody>
+    </table>
   );
 }
 
