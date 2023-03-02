@@ -10,29 +10,33 @@ const Index = () => {
       .then(res => res.json());
     setWakimizu(result.result);
   }
+  fetchWakimizu();
 
   return (
     <>
-      <div>
-        <select onChange={e => setPref(e.target.value)}>
-          {prefs.map((pref, index) => {
-            return <option value={pref} key={index}>{pref}</option>
-          })}
-        </select>
-        <button onClick={fetchWakimizu}>検索</button>
-      </div>
-      <div>
-        <Table wakimizu={wakimizu}/>
-      </div>
+      <SelectBox fn={e => setPref(e.target.value)} />
+      <Table wakimizu={wakimizu} />
     </>
   );
 }
 
-const Table = ({wakimizu}) => {
+const SelectBox = ({ fn }) => {
+  return (
+    <select onChange={fn}>
+      {prefs.map((pref, index) => {
+        return <option value={pref} key={index}>{pref}</option>
+      })}
+    </select>
+  );
+}
+
+const Table = ({ wakimizu }) => {
   if (!Object.keys(wakimizu).length) {
     return null;
   }
 
+  // FIXME: keyにindexを使うのは微妙
+  // https://ja.reactjs.org/docs/lists-and-keys.html#keys
   let index = 0;
   const tableCells = Object.keys(wakimizu).map(key => (
     <tr key={key}>
