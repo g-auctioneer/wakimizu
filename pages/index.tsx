@@ -1,6 +1,8 @@
 import { useState } from "react";
 import PrefsSelectBox from "../components/PrefsSelectBox";
 import WakimizuTable from "../components/WakimizuTable";
+import { ChakraProvider } from '@chakra-ui/react'
+// import { Container } from '@chakra-ui/react'
 
 const Index = () => {
   const [ pref, setPref ] = useState("北海道");
@@ -14,10 +16,10 @@ const Index = () => {
   fetchWakimizu();
 
   return (
-    <>
+    <ChakraProvider>
       <PrefsSelectBox fn={e => setPref(e.target.value)} />
       <WakimizuTable wakimizu={wakimizu} />
-    </>
+    </ChakraProvider>
   );
 }
 
