@@ -1,6 +1,6 @@
 import prefs from "../utils/define";
 
-const SelectBox = ({ fn }) => {
+const PrefsSelectBox = ({ fn }) => {
   return (
     <select onChange={fn}>
       {prefs.map((pref, index) => {
@@ -10,4 +10,4 @@ const SelectBox = ({ fn }) => {
   );
 }
 
-export default SelectBox;
+export default PrefsSelectBox;

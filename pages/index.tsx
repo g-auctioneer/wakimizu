@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SelectBox from "../components/SelectBox";
+import PrefsSelectBox from "../components/PrefsSelectBox";
 import WakimizuTable from "../components/WakimizuTable";
 
 const Index = () => {
@@ -15,7 +15,7 @@ const Index = () => {
 
   return (
     <>
-      <SelectBox fn={e => setPref(e.target.value)} />
+      <PrefsSelectBox fn={e => setPref(e.target.value)} />
       <WakimizuTable wakimizu={wakimizu} />
     </>
   );
